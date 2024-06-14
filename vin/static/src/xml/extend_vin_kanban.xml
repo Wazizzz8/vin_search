@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="KanbanView.buttons" t-name="AddsKanbanView.buttons">
+        <t t-jquery="button" t-operation="after">
+            <button type="button" class="btn btn-primary o_button_add_kanban_btn">车架号查询</button>
+        </t>
+    </t>
+</templates>

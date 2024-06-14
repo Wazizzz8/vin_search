@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define the action for the television schedule list view -->
+        <record id="action_vin" model="ir.actions.act_window">
+            <field name="name">车辆识别码</field>
+            <field name="res_model">vehicle.info</field>
+            <field name="view_mode">kanban,tree</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a vin record.
+                </p>
+            </field>
+        </record>
+
+        <!-- Define the tree view for the television schedule -->
+        <record id="view_vehicle_info_tree" model="ir.ui.view">
+            <field name="name">vehicle.info.tree</field>
+            <field name="model">vehicle.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="vin"/>
+                    <!-- Add other fields here as needed -->
+                </tree>
+            </field>
+        </record>
+
+        <!-- Define the kanban view for the vehicle info -->
+        <record id="view_vehicle_info_kanban" model="ir.ui.view">
+            <field name="name">vehicle.info.kanban</field>
+            <field name="model">vehicle.info</field>
+            <field name="arch" type="xml">
+                <kanban js_class="add_buttons_kanban">
+                    <field name="name"/>
+                    <templates>
+                        <!-- Define the kanban card template -->
+                        <t t-name="kanban-description">
+                            <div class="oe_group_name" t-if="record.name.raw_value">
+                                <field name="name"/>
+                            </div>
+                        </t>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_vignette oe_kanban_global_click d-flex align-items-center">
+                                <p class="oe_module_name">
+                                    <field name="name"/>
+                                </p>
+                            </div>
+                        </t>
+                    </templates>
+<!--                    <script type="text/javascript" src="/television_schedule/static/src/js/kanban_extend.js"/>-->
+                </kanban>
+            </field>
+        </record>
+
+
+        <menuitem name="车辆识别" id="vin.menu_vin_root" groups="base.group_user" sequence="100"/>
+        <menuitem name="车辆识别" id="vin.menu_vin_detail" parent="vin.menu_vin_root" groups="base.group_user"/>
+        <menuitem id="vin.menu_vin_schedule" name="车架查询" parent="vin.menu_vin_detail" action="action_vin" groups="base.group_user"/>
+
+    </data>
+</odoo>
